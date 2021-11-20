@@ -5,8 +5,7 @@ import moment from 'moment'
 
 let setMessageFunc
 const Modal = ({ onAdd }) => {
-  //console.log(props)
-  // let [message, setMessage] = useState()
+  
   let [user, setUser] = useState('')
   let [username, setUserName] = useState('')
   let [age, setAge] = useState('')
