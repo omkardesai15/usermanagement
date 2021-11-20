@@ -16,8 +16,8 @@ const Modal = ({ onAdd }) => {
     setUser(user || {})
   }
 
-  console.log(user)
 
+  // handle user funtion
   let handleUser = (id, event) => {
     console.log(user)
     console.log(id)
