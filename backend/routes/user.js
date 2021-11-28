@@ -37,11 +37,13 @@ router.route('/update/:id').post((req , res) => {
     .then( user => {
         user.username = req.body.username;
         user.companyname = req.body.companyname;
-        user.duration = Number(req.body.age);
-        user.date = Date.parse(req.body.dateofbirth);
-
+        user.age = Number(req.body.age);
+        user.dateofbirth = Date.parse(req.body.dateofbirth);
         user.save()
-        .then( () => res.json('User updated !!!'))
+        .then( (result) => {
+            console.log("REsult is :",result);
+            res.json('User updated !!!');
+        })
         .catch(err => res.status(400).json('Error : ' +err));
     })
     .catch(err => res.status(400).json('Error : ' +err));
