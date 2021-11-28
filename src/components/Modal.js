@@ -13,23 +13,41 @@ const Modal = ({ onAdd }) => {
   let [dateofbirth, setDateOfBirth] = useState('')
 
   setMessageFunc = user => {
-    setUser(user || {})
+    setUser(user)
+
+    /* if(user){
+      setUser(user.username);
+      setAge(user.age);
+      setCompanyName(user.companyname);
+      setDateOfBirth(user.dateofbirth);
+    } */
+
   }
 
 
   // handle user funtion
-  let handleUser = (id, event) => {
-    console.log(user)
-    console.log(id)
-
+  let handleUser = (event) => {
+    console.log(user._id)
+    console.log(event);
+ 
     !user
       ? onAdd({ username, age, companyname, dateofbirth })
-      : EditUser(id, event)
+      : EditUser(user._id,event.target)
   }
 
   //Edit User
 
-  const EditUser = async (id, data) => {
+  const EditUser = async (id,inputData) => {
+    console.log(id);
+    let data = {
+      id  : id,
+      username : inputData[0].value,
+      companyname : inputData[1].value,
+      age: inputData[2].value,
+      dateofbirth : inputData[3].value,
+    }
+    console.log(data);
+    
     try {
       const res = await fetch(`http://localhost:5000/user/update/${id}`, {
         method: 'POST',
@@ -64,7 +82,7 @@ const Modal = ({ onAdd }) => {
           <div className='modal-header'>
             <h5 className='modal-title' id='exampleModalLabel'>
               {(() => {
-                if (!user.id) {
+                if (!user) {
                   return 'Add user'
                 } else {
                   return 'Edit User'
@@ -80,7 +98,7 @@ const Modal = ({ onAdd }) => {
                 <input
                   type='text'
                   className='form-control'
-                  value={user.username}
+                  defaultValue={ user ? user.username : username} 
                   id='exampleInputEmail1'
                   aria-describedby='emailHelp'
                   onChange={e => setUserName(e.target.value)}
@@ -91,7 +109,7 @@ const Modal = ({ onAdd }) => {
                 <input
                   type='text'
                   className='form-control'
-                  value={user.companyname}
+                  defaultValue={user ? user.companyname : companyname}
                   id='exampleInputEmail1'
                   aria-describedby='emailHelp'
                   onChange={e => setCompanyName(e.target.value)}
@@ -102,7 +120,7 @@ const Modal = ({ onAdd }) => {
                 <input
                   type='text'
                   className='form-control'
-                  value={user.age}
+                  defaultValue={ user ? user.age : age}
                   id='exampleInputEmail1'
                   aria-describedby='emailHelp'
                   onChange={e => setAge(e.target.value)}
@@ -113,7 +131,7 @@ const Modal = ({ onAdd }) => {
                 <input
                   type='date'
                   placeholder='dd-mm-yyyy'
-                  value={moment(user.dateofbirth).format('YYYY-MM-DD')}
+                  defaultValue={ user ? moment(user.dateofbirth).format('YYYY-MM-DD') : dateofbirth}
                   min='1901-01-01'
                   max='2030-12-31'
                   onChange={e => setDateOfBirth(e.target.value)}
