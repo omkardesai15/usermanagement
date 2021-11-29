@@ -1,5 +1,4 @@
 import { useLocation } from 'react-router-dom'
-//import { useState, useEffect } from 'react'
 import {Modal, setMessageFunc} from './Modal'
 
 const Header = props => {
@@ -15,7 +14,6 @@ const Header = props => {
     })
 
     const data = await res.json()
-  
     console.log(data);
 
   }
