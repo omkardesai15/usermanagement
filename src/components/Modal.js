@@ -1,7 +1,6 @@
 import React from 'react'
 import { useState } from 'react'
 import moment from 'moment'
-//import User from './User'
 
 let setMessageFunc
 const Modal = ({ onAdd }) => {
@@ -14,14 +13,6 @@ const Modal = ({ onAdd }) => {
 
   setMessageFunc = user => {
     setUser(user)
-
-    /* if(user){
-      setUser(user.username);
-      setAge(user.age);
-      setCompanyName(user.companyname);
-      setDateOfBirth(user.dateofbirth);
-    } */
-
   }
 
 
