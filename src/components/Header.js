@@ -15,7 +15,7 @@ const Header = props => {
     })
 
     const data = await res.json()
-
+  
     console.log(data);
 
   }
