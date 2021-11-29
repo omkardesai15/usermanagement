@@ -16,7 +16,7 @@ const User = (props) => {
       setResult(userFromServer)
     }
     getUser()
-  }, [])
+  },[])
 
   //Fetch User
   const fetchUser = async () => {
