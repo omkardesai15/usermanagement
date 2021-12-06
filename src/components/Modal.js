@@ -4,7 +4,6 @@ import moment from 'moment'
 
 let setMessageFunc
 const Modal = ({ onAdd }) => {
-  
   let [user, setUser] = useState('')
   let [username, setUserName] = useState('')
   let [age, setAge] = useState('')
@@ -15,30 +14,29 @@ const Modal = ({ onAdd }) => {
     setUser(user)
   }
 
-
   // handle user funtion
-  let handleUser = (event) => {
-  //  console.log(user._id)
-    console.log(event);
- 
+  let handleUser = event => {
+    //  console.log(user._id)
+    console.log(event)
+
     !user
       ? onAdd({ username, age, companyname, dateofbirth })
-      : EditUser(user._id,event.target)
+      : EditUser(user._id, event.target)
   }
 
   //Edit User
 
-  const EditUser = async (id,inputData) => {
-    console.log(id);
+  const EditUser = async (id, inputData) => {
+    console.log(id)
     let data = {
-      id  : id,
-      username : inputData[0].value,
-      companyname : inputData[1].value,
+      id: id,
+      username: inputData[0].value,
+      companyname: inputData[1].value,
       age: inputData[2].value,
-      dateofbirth : inputData[3].value,
+      dateofbirth: inputData[3].value
     }
-    console.log(data);
-    
+    console.log(data)
+
     try {
       const res = await fetch(`http://localhost:5000/user/update/${id}`, {
         method: 'POST',
@@ -65,10 +63,12 @@ const Modal = ({ onAdd }) => {
       tabIndex='-1'
       aria-labelledby='exampleModalLabel'
       aria-hidden='true'
-      
     >
-      <div className='modal-dialog' data-backdrop='static'
-      data-keyboard='false'>
+      <div
+        className='modal-dialog'
+        data-backdrop='static'
+        data-keyboard='false'
+      >
         <div className='modal-content'>
           <div className='modal-header'>
             <h5 className='modal-title' id='exampleModalLabel'>
@@ -89,7 +89,7 @@ const Modal = ({ onAdd }) => {
                 <input
                   type='text'
                   className='form-control'
-                  defaultValue={ user ? user.username : username} 
+                  defaultValue={user ? user.username : username}
                   id='exampleInputEmail1'
                   aria-describedby='emailHelp'
                   onChange={e => setUserName(e.target.value)}
@@ -111,7 +111,7 @@ const Modal = ({ onAdd }) => {
                 <input
                   type='text'
                   className='form-control'
-                  defaultValue={ user ? user.age : age}
+                  defaultValue={user ? user.age : age}
                   id='exampleInputEmail1'
                   aria-describedby='emailHelp'
                   onChange={e => setAge(e.target.value)}
@@ -119,14 +119,18 @@ const Modal = ({ onAdd }) => {
               </div>
               <div className='mb-3'>
                 <label className='form-label'>Date of Birth</label>{' '}
-                <input
+                 <input
                   type='date'
                   placeholder='dd-mm-yyyy'
-                  defaultValue={ user ? moment(user.dateofbirth).format('YYYY-MM-DD') : dateofbirth}
+                  defaultValue={
+                    user
+                      ? moment(user.dateofbirth).format('YYYY-MM-DD')
+                      : dateofbirth
+                  }
                   min='1901-01-01'
                   max='2030-12-31'
                   onChange={e => setDateOfBirth(e.target.value)}
-                />
+                /> 
               </div>
               {(() => {
                 if (!user) {
